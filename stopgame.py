@@ -46,15 +46,15 @@ class StopGame:
 		poster = re.match(r'background-image:\s*url\((.+?)\)', html.select('.image-game-logo > .image')[0]['style'])
 
 		# remove some stuff
-		remels = html.select('.article.article-show > *')
+		remels = html.select('._post_content')
 		for remel in remels:
 			remel.extract()
 
 		# form data
 		info = {
-			"title": item.find('div', class_='wall_post_text').get_text(strip=True),
+			"title": html.select('.post_content')[0].text,
 			"link": link,
-			"image": item.find('a', class_="page_post_thumb_wrap image_cover  page_post_thumb_last_column page_post_thumb_last_row")
+			"image": poster.group(1)
 		};
 
 		return info
