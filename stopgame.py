@@ -55,7 +55,7 @@ class StopGame:
 			"title": html.select('.post_content')[0].text,
 			"link": link,
 			"image": poster.group(1)
-		};
+		}
 
 		return info
 
