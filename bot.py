@@ -17,7 +17,7 @@ bot = Bot(token=config.API_TOKEN)
 dp = Dispatcher(bot)
 
 # инициализируем соединение с БД
-bd = SQLighter('bd.bd')
+bd = SQLighter('db.db')
 
 # инициализируем парсер
 sg=StopGame('lastkey_file.txt')
@@ -78,5 +78,7 @@ async def scheduled(wait_for):
 
 # запускаем лонг поллинг
 if __name__ == '__main__':
+	loop = asyncio.get_event_loop()
+	loop.create_task(scheduled(1))
 	#dp.loop.create_task(scheduled(10))# пока что оставим 10 секунд (в качестве теста)
 	executor.start_polling(dp, skip_updates=True)
